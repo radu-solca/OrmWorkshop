@@ -1,40 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using Dapper;
 using eShop.Domain;
 using eShop.Domain.Repositories;
 
 namespace eShop.DataAccess.Dapper
 {
-    public class DapperRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
-    {
-        public TEntity GetbyId(Guid id)
+    public abstract class DapperRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    { 
+        private readonly string _tableName;
+        private const string DBConnectionString = @"Server=localhost\SQLEXPRESS; Database=OnlineShop;User id=OnlineShop; Password=OnlineShop";
+
+        internal IDbConnection Connection
         {
-            throw new NotImplementedException();
+            get
+            {
+                return new SqlConnection(DBConnectionString);
+            }
         }
 
-        public ICollection<TEntity> GetAll()
+        public DapperRepository(string tableName)
         {
-            throw new NotImplementedException();
+            _tableName = tableName;
         }
 
-        public ICollection<TEntity> Find(Func<TEntity, bool> filter)
+        //Anonymus parameters
+        public virtual TEntity GetbyId(Guid id)
+        {
+            TEntity item = default(TEntity);
+
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                item = cn.QuerySingleOrDefault<TEntity>("SELECT * FROM " + _tableName + " WHERE ID=@ID", new { ID = id });
+            }
+
+            return item;
+        }
+
+        public abstract ICollection<TEntity> GetAll();
+
+        public List<TEntity> GetAllDefault()
+        {
+            List<TEntity> items = null;
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                items = cn.Query<TEntity>("SELECT * FROM " + _tableName).ToList();
+            }
+
+            return items;
+        }
+
+        public virtual ICollection<TEntity> Find(Func<TEntity, bool> filter)
         {
             throw new NotImplementedException();
         }
 
         public void Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                Insert(entity, cn);
+            }
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                Update(entity, cn);
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                var sql = "DELETE FROM " + _tableName + " WHERE ID=@ID";
+                cn.Execute(sql, new { ID = id });
+            }
         }
+
+        public abstract void Insert(TEntity entity, IDbConnection connection);
+
+        public abstract void Update(TEntity entity, IDbConnection connection);
     }
 }
