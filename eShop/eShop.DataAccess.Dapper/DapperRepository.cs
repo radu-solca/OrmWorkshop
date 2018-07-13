@@ -9,18 +9,12 @@ using eShop.Domain.Repositories;
 
 namespace eShop.DataAccess.Dapper
 {
-    public abstract class DapperRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public abstract class DapperRepository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     { 
         private readonly string _tableName;
         private const string DBConnectionString = @"Server=localhost\SQLEXPRESS; Database=OnlineShop;User id=OnlineShop; Password=OnlineShop";
 
-        internal IDbConnection Connection
-        {
-            get
-            {
-                return new SqlConnection(DBConnectionString);
-            }
-        }
+        internal IDbConnection Connection => new SqlConnection(DBConnectionString);
 
         public DapperRepository(string tableName)
         {

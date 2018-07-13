@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.DataAccess.Dapper", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Tests", "05 - Tests", "{F56E1CDE-DB84-41F4-BD5C-54AB3D8E103B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.DataAccess.Dapper.Tests", "eShop.DataAccess.Dapper.Tests\eShop.DataAccess.Dapper.Tests.csproj", "{5D5D5446-020E-476E-9120-B891304D1008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.DataAccess.Dapper.Tests", "eShop.DataAccess.Dapper.Tests\eShop.DataAccess.Dapper.Tests.csproj", "{5D5D5446-020E-476E-9120-B891304D1008}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - API", "00 - API", "{CB66AE44-8717-4059-BC4F-A42A562CD1EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

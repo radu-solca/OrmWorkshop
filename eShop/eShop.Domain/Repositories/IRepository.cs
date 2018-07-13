@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace eShop.Domain.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : Entity
+    public interface IRepository<TEntity> where TEntity : Entity, new()
     {
         TEntity GetbyId(Guid id);
         ICollection<TEntity> GetAll();
