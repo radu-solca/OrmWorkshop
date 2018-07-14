@@ -1,8 +1,11 @@
-﻿using eShop.DataAccess.EntityFramework;
+﻿using eShop.DataAccess.Dapper;
+using eShop.DataAccess.EntityFramework;
 using eShop.DataAccess.EntityFramework.Context;
+using eShop.Domain;
 using eShop.Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +25,13 @@ namespace eShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            // EF
             services.AddDbContext<OnlineShopContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
+            
+            //Dapper
+            //services.AddTransient(typeof(IRepository<Customer>), typeof(CustomerRepository));
+            //services.AddTransient(typeof(IRepository<Order>), typeof(OrderRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

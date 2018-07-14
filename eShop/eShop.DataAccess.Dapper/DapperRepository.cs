@@ -12,7 +12,7 @@ namespace eShop.DataAccess.Dapper
     public abstract class DapperRepository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     { 
         private readonly string _tableName;
-        private const string DBConnectionString = @"Server=localhost\SQLEXPRESS; Database=OnlineShop;User id=OnlineShop; Password=OnlineShop";
+        private const string DBConnectionString = @"Server=localhost\SQLEXPRESS; Database=OnlineShop_Dapper;Integrated Security=True";
 
         internal IDbConnection Connection => new SqlConnection(DBConnectionString);
 
@@ -82,8 +82,8 @@ namespace eShop.DataAccess.Dapper
             }
         }
 
-        public abstract void Insert(TEntity entity, IDbConnection connection);
+        protected abstract void Insert(TEntity entity, IDbConnection connection);
 
-        public abstract void Update(TEntity entity, IDbConnection connection);
+        protected abstract void Update(TEntity entity, IDbConnection connection);
     }
 }

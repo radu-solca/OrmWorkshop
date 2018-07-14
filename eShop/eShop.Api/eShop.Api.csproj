@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\eShop.DataAccess.Dapper\eShop.DataAccess.Dapper.csproj" />
     <ProjectReference Include="..\eShop.DataAccess.EntityFramework\eShop.DataAccess.EntityFramework.csproj" />
     <ProjectReference Include="..\eShop.Domain\eShop.Domain.csproj" />
   </ItemGroup>

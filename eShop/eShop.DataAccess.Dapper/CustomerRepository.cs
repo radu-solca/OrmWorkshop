@@ -7,57 +7,54 @@ namespace eShop.DataAccess.Dapper
 {
     public class CustomerRepository : DapperRepository<Customer>
     {
-        public CustomerRepository(string tableName) : base(tableName)
+        private const string InsertSql = @"INSERT INTO [Customer] ([Id],[FirstName],[LastName],[Age])
+ values (@Id, @FirstName, @LastName, @Age)";
+
+        public CustomerRepository() : base("[Customer]")
         {
         }
 
         public override ICollection<Customer> GetAll()
         {
-            return base.GetAllDefault();
+            return GetAllDefault();
         }
 
         //StronglyTyped
         public override void Insert(Customer customer, IDbConnection connection)
         {
-            var sql = @"INSERT INTO [Customer] ([Id],[FirstName],[LastName],[Age])
- values (@Id, @FirstName, @LastName, @Age)";
-            connection.Execute(sql, customer);
+            InsertStronglyTyped(customer, connection);
+            //InsertWithAnonymusParameters(customer, connection);
         }
 
-         public override void Update(Customer customer, IDbConnection connection)
+        private void InsertStronglyTyped(Customer customer, IDbConnection connection)
+        {
+            connection.Execute(InsertSql, customer);
+        }
+
+        private void InsertWithAnonymusParameters(Customer customer, IDbConnection connection)
+        {
+            var parameters = new[]
+            {
+                new {Id = 2, FirstName = "NumeAnonymus", LastName = "adressAnonymus", Age = 7}
+            };
+            connection.Execute(InsertSql, parameters);
+        }
+
+        public override void Update(Customer customer, IDbConnection connection)
         {
             var sql = @"Update Customer 
                 Set FirstName = @FirstName
                 Where Id = @Id";
             var parameters = new[]
             {
-                new {Id = customer.Id, FirstName = "NumeAnonymus"}
+                new {customer.Id, FirstName = customer.FirstName}
             };
-            connection.Execute(sql,parameters);
-        }
-
-
-        public void InsertStronglyTyped(Customer customer, IDbConnection connection)
-        {
-            var sql = @"INSERT INTO [Customer] ([Id],[FirstName],[LastName],[Age])
- values (@Id, @FirstName, @LastName, @Age)";
-            connection.Execute(sql, customer);
-        }
-
-        public void InsertWithAnonymusParameters(Customer customer, IDbConnection connection)
-        {
-            var sql = @"INSERT INTO [Customer] ([Id],[FirstName],[LastName],[Age])
- values (@Id, @FirstName, @LastName, @Age)";
-            var parameters = new[]
-            {
-                new {Id = 2, FirstName = "NumeAnonymus", LastName = "adressAnonymus", Age = 7}
-            };
-            connection.Execute(sql,parameters);
+            connection.Execute(sql, parameters);
         }
 
         public void CreateTable()
         {
-            using (IDbConnection con = Connection)
+            using (var con = Connection)
             {
                 con.Open();
                 var sql = @"create table [Customer] (
@@ -68,9 +65,6 @@ namespace eShop.DataAccess.Dapper
                 con.Execute(sql);
                 con.Close();
             }
-
         }
-
-
     }
 }

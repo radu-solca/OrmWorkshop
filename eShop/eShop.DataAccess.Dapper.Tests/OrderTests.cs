@@ -14,7 +14,7 @@ namespace eShop.DataAccess.Dapper.Tests
         [TestInitialize]
         public void Initialize()
         {
-            _repository = new OrderRepository("[Order]");
+            _repository = new OrderRepository();
         }
 
         [TestMethod]
