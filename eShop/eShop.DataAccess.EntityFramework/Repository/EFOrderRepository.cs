@@ -17,8 +17,8 @@ namespace eShop.DataAccess.EntityFramework
         {
             return Context
                 .Set<Order>()
-                .Include(o => o.Customer)
-                .Include(o => o.Items)
+                //.Include(o => o.Customer)
+                //.Include(o => o.Items)
                 .ToList();
         }
 
