@@ -11,7 +11,7 @@ namespace eShop.Domain
         public DateTime PlacedAt { get; set; }
         public DateTime? DeliveredAt { get; set; }
 
-        public decimal Amount { get; set; }
+        public decimal TotalPrice { get; set; }
         public List<OrderItem> Items { get; set; }
     }
 }

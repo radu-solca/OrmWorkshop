@@ -5,7 +5,7 @@ namespace eShop.Domain.Repositories
 {
     public interface IRepository<TEntity> where TEntity : Entity, new()
     {
-        TEntity GetbyId(Guid id);
+        TEntity GetById(Guid id);
         ICollection<TEntity> GetAll();
         ICollection<TEntity> Find(Func<TEntity, bool> filter);
 

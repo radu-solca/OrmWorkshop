@@ -43,7 +43,7 @@ namespace eShop.DataAccess.EntityFramework.Migrations
                     CustomerId = table.Column<Guid>(nullable: false),
                     PlacedAt = table.Column<DateTime>(nullable: false),
                     DeliveredAt = table.Column<DateTime>(nullable: true),
-                    Amount = table.Column<decimal>(nullable: false)
+                    TotalPrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

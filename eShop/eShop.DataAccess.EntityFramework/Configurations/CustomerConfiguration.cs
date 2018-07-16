@@ -1,5 +1,4 @@
-﻿using System;
-using eShop.Domain;
+﻿using eShop.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

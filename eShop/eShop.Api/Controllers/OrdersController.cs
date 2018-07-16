@@ -26,7 +26,7 @@ namespace eShop.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            return Ok(repository.GetbyId(id));
+            return Ok(repository.GetById(id));
         }
 
         // POST api/values

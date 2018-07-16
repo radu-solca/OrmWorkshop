@@ -10,7 +10,7 @@ using eShop.DataAccess.EntityFramework.Context;
 namespace eShop.DataAccess.EntityFramework.Migrations
 {
     [DbContext(typeof(OnlineShopContext))]
-    [Migration("20180716074118_InitialMigration")]
+    [Migration("20180716081731_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,13 +42,13 @@ namespace eShop.DataAccess.EntityFramework.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal>("Amount");
-
                     b.Property<Guid>("CustomerId");
 
                     b.Property<DateTime?>("DeliveredAt");
 
                     b.Property<DateTime>("PlacedAt");
+
+                    b.Property<decimal>("TotalPrice");
 
                     b.HasKey("Id");
 

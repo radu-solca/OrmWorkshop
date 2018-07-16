@@ -40,13 +40,13 @@ namespace eShop.DataAccess.EntityFramework.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal>("Amount");
-
                     b.Property<Guid>("CustomerId");
 
                     b.Property<DateTime?>("DeliveredAt");
 
                     b.Property<DateTime>("PlacedAt");
+
+                    b.Property<decimal>("TotalPrice");
 
                     b.HasKey("Id");
 

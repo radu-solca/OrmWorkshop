@@ -19,8 +19,8 @@ namespace eShop.DataAccess.Dapper
             var sqlInsertProduct = @"insert into [Product] ([Id], [Description], [Price])
  values (@Id, @Description, @Price)";
 
-            var sqlInsertOrder = @"insert into [Order] ([Id], [CustomerId], [Amount], [PlacedAt], [DeliveredAt])
-values (@Id, @CustomerId, @Amount, @PlacedAt, @DeliveredAt)";
+            var sqlInsertOrder = @"insert into [Order] ([Id], [CustomerId], [TotalPrice], [PlacedAt], [DeliveredAt])
+values (@Id, @CustomerId, @TotalPrice, @PlacedAt, @DeliveredAt)";
 
             var sqlInsertOrderItem = @"insert into [OrderItem] ([Id], [OrderId], [ProductId], [Quantity])
 values (@Id, @OrderId, @ProductId, @Quantity)";

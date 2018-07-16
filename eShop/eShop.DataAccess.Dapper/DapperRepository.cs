@@ -24,7 +24,7 @@ namespace eShop.DataAccess.Dapper
         }
 
         //Anonymus parameters
-        public virtual TEntity GetbyId(Guid id)
+        public virtual TEntity GetById(Guid id)
         {
             TEntity item = default(TEntity);
 

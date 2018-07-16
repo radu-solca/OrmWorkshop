@@ -45,7 +45,7 @@ VALUES ('49d1967c-2a10-49db-b797-db57eabfc4f8','Customer for','insert order',20)
             var order = new Order
             {
                 Id = orderId,
-                Amount = 100,
+                TotalPrice = 100,
                 CustomerId = new Guid("49d1967c-2a10-49db-b797-db57eabfc4f8"),
                 PlacedAt = DateTime.Now,
                 Items = new List<OrderItem>{orderItem}
