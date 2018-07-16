@@ -50,6 +50,8 @@ namespace eShop.DataAccess.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Orders");
                 });
 
@@ -89,9 +91,17 @@ namespace eShop.DataAccess.EntityFramework.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("eShop.Domain.Order", b =>
+                {
+                    b.HasOne("eShop.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("eShop.Domain.OrderItem", b =>
                 {
-                    b.HasOne("eShop.Domain.Order")
+                    b.HasOne("eShop.Domain.Order", "Order")
                         .WithMany("Items")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);

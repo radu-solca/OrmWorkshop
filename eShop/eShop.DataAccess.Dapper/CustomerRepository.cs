@@ -20,7 +20,7 @@ namespace eShop.DataAccess.Dapper
         }
 
         //StronglyTyped
-        public override void Insert(Customer customer, IDbConnection connection)
+        protected override void Insert(Customer customer, IDbConnection connection)
         {
             InsertStronglyTyped(customer, connection);
             //InsertWithAnonymusParameters(customer, connection);
@@ -40,7 +40,7 @@ namespace eShop.DataAccess.Dapper
             connection.Execute(InsertSql, parameters);
         }
 
-        public override void Update(Customer customer, IDbConnection connection)
+        protected override void Update(Customer customer, IDbConnection connection)
         {
             var sql = @"Update Customer 
                 Set FirstName = @FirstName

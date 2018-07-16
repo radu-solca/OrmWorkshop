@@ -14,7 +14,7 @@ namespace eShop.DataAccess.Dapper
         }
 
         //Explain how transaction works
-        public override void Insert(Order order, IDbConnection cn)
+        protected override void Insert(Order order, IDbConnection cn)
         {
             var sqlInsertProduct = @"insert into [Product] ([Id], [Description], [Price])
  values (@Id, @Description, @Price)";
@@ -99,7 +99,7 @@ values (@Id, @OrderId, @ProductId, @Quantity)";
             }
         }
 
-        public override void Update(Order entity, IDbConnection connection)
+        protected override void Update(Order entity, IDbConnection connection)
         {
             throw new NotImplementedException();
         }

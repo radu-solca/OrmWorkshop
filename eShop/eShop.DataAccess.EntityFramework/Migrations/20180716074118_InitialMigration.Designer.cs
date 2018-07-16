@@ -10,7 +10,7 @@ using eShop.DataAccess.EntityFramework.Context;
 namespace eShop.DataAccess.EntityFramework.Migrations
 {
     [DbContext(typeof(OnlineShopContext))]
-    [Migration("20180713124538_InitialMigration")]
+    [Migration("20180716074118_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,8 @@ namespace eShop.DataAccess.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Orders");
                 });
 
@@ -91,9 +93,17 @@ namespace eShop.DataAccess.EntityFramework.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("eShop.Domain.Order", b =>
+                {
+                    b.HasOne("eShop.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("eShop.Domain.OrderItem", b =>
                 {
-                    b.HasOne("eShop.Domain.Order")
+                    b.HasOne("eShop.Domain.Order", "Order")
                         .WithMany("Items")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
