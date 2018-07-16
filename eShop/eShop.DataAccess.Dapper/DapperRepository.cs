@@ -10,9 +10,11 @@ using eShop.Domain.Repositories;
 namespace eShop.DataAccess.Dapper
 {
     public abstract class DapperRepository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
-    { 
+    {
         private readonly string _tableName;
-        private const string DBConnectionString = @"Server=localhost\SQLEXPRESS; Database=OnlineShop_Dapper;Integrated Security=True";
+
+        private const string DBConnectionString =
+            @"Server=localhost\SQLEXPRESS; Database=OnlineShop_Dapper;Integrated Security=True";
 
         internal IDbConnection Connection => new SqlConnection(DBConnectionString);
 
@@ -29,7 +31,7 @@ namespace eShop.DataAccess.Dapper
             using (IDbConnection cn = Connection)
             {
                 cn.Open();
-                item = cn.QuerySingleOrDefault<TEntity>("SELECT * FROM " + _tableName + " WHERE ID=@ID", new { ID = id });
+                item = cn.QuerySingleOrDefault<TEntity>("SELECT * FROM " + _tableName + " WHERE ID=@ID", new {ID = id});
             }
 
             return item;
@@ -78,7 +80,7 @@ namespace eShop.DataAccess.Dapper
             {
                 cn.Open();
                 var sql = "DELETE FROM " + _tableName + " WHERE ID=@ID";
-                cn.Execute(sql, new { ID = id });
+                cn.Execute(sql, new {ID = id});
             }
         }
 
