@@ -24,6 +24,7 @@ namespace eShop.DataAccess.Dapper
         }
 
         //Anonymus parameters
+        //Generic implementation
         public virtual TEntity GetById(Guid id)
         {
             TEntity item = default(TEntity);
@@ -56,7 +57,7 @@ namespace eShop.DataAccess.Dapper
             throw new NotImplementedException();
         }
 
-        public void Create(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             using (IDbConnection cn = Connection)
             {
@@ -65,7 +66,7 @@ namespace eShop.DataAccess.Dapper
             }
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             using (IDbConnection cn = Connection)
             {

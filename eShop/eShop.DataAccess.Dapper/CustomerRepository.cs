@@ -18,8 +18,7 @@ namespace eShop.DataAccess.Dapper
         {
             return GetAllDefault();
         }
-
-        //StronglyTyped
+        
         protected override void Insert(Customer customer, IDbConnection connection)
         {
             InsertStronglyTyped(customer, connection);
@@ -35,8 +34,9 @@ namespace eShop.DataAccess.Dapper
         {
             var parameters = new[]
             {
-                new {Id = 2, FirstName = "NumeAnonymus", LastName = "adressAnonymus", Age = 7}
+                new {Id = customer.Id, FirstName = customer.FirstName, LastName = customer.LastName, Age = customer.Age}
             };
+
             connection.Execute(InsertSql, parameters);
         }
 
@@ -45,6 +45,7 @@ namespace eShop.DataAccess.Dapper
             var sql = @"Update Customer 
                 Set FirstName = @FirstName
                 Where Id = @Id";
+
             var parameters = new[]
             {
                 new {customer.Id, FirstName = customer.FirstName}
@@ -52,6 +53,7 @@ namespace eShop.DataAccess.Dapper
             connection.Execute(sql, parameters);
         }
 
+        //In this way you can create a table with Dapper
         public void CreateTable()
         {
             using (var con = Connection)

@@ -1,4 +1,5 @@
-﻿using eShop.DataAccess.EntityFramework;
+﻿using eShop.DataAccess.Dapper;
+using eShop.DataAccess.EntityFramework;
 using eShop.DataAccess.EntityFramework.Context;
 using eShop.Domain;
 using eShop.Domain.Repositories;
@@ -26,15 +27,16 @@ namespace eShop.Api
             services.AddMvc();
 
             // EF
-            services.AddDbContext<OnlineShopContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddTransient(typeof(IRepository<Customer>), typeof(EFCustomerRepository));
-            services.AddTransient(typeof(IRepository<Product>), typeof(EFProductRepository));
-            services.AddTransient(typeof(IRepository<Order>), typeof(EFOrderRepository));
-            services.AddTransient(typeof(IRepository<OrderItem>), typeof(EFOrderItemRepository));
+            //services.AddDbContext<OnlineShopContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            //services.AddTransient(typeof(IRepository<Customer>), typeof(EFCustomerRepository));
+            //services.AddTransient(typeof(IRepository<Product>), typeof(EFProductRepository));
+            //services.AddTransient(typeof(IRepository<Order>), typeof(EFOrderRepository));
+            //services.AddTransient(typeof(IRepository<OrderItem>), typeof(EFOrderItemRepository));
 
             // Dapper
-            // services.AddTransient(typeof(IRepository<Customer>), typeof(CustomerRepository));
-            // services.AddTransient(typeof(IRepository<Order>), typeof(OrderRepository));
+             services.AddTransient(typeof(IRepository<Customer>), typeof(CustomerRepository));
+             services.AddTransient(typeof(IRepository<Order>), typeof(OrderRepository));
+             services.AddTransient(typeof(IRepository<Product>), typeof(ProductRepository));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
