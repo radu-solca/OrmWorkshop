@@ -7,9 +7,11 @@
 
   <ItemGroup>
     <None Remove="Scripts\Script0001 - Create tables.sql" />
+    <None Remove="Scripts\Script0002 - Add procedure.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Script0002 - Add procedure.sql" />
     <EmbeddedResource Include="Scripts\Script0001 - Create tables.sql" />
   </ItemGroup>
 
